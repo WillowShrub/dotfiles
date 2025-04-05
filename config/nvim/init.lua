@@ -122,6 +122,10 @@ vim.keymap.set({'n', 'i'}, '<C-k>', function () harpoon:list():select(2) end)
 vim.keymap.set({'n', 'i'}, '<C-l>', function () harpoon:list():select(3) end)
 vim.keymap.set({'n', 'i'}, '<C-h>', function () harpoon:list():select(4) end)
 
+if vim.o.wrap then
+  vim.keymap.set("n", "j", [[v:count ? 'j' : 'gj']], { expr = true })
+  vim.keymap.set("n", "k", [[v:count ? 'k' : 'gk']], { expr = true })
+end
 
 -- Visual
 vim.o.termguicolors = true
