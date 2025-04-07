@@ -1,3 +1,6 @@
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 -- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local path_package = vim.fn.stdpath('data') .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
@@ -11,18 +14,19 @@ if not vim.loop.fs_stat(mini_path) then
     vim.cmd('packadd mini.nvim | helptags ALL')
     vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
-
 -- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup({ path = { package = path_package } })
 local add = MiniDeps.add
---
+
 -- LSP
-add({
-    source = 'neovim/nvim-lspconfig',
-})
-require'lspconfig'.lua_ls.setup{}
-require'lspconfig'.clangd.setup{}
-require'lspconfig'.zls.setup{}
+-- add({
+--     source = 'neovim/nvim-lspconfig',
+-- })
+-- require'lspconfig'.lua_ls.setup{}
+-- require'lspconfig'.clangd.setup{}
+-- require'lspconfig'.zls.setup{}
+vim.o.completeopt = "menu,menuone,noinsert,noselect,popup,fuzzy,preview"
+vim.o.pumheight = 10
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('my.lsp', {}),
     callback = function(args)
@@ -33,23 +37,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
             client.server_capabilities.completionProvider.triggerCharacters = chars
 
             vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+
+            -- vim.keymap.set({'i'}, '<Tab>', "pumvisible() ? '<c-n>' : '<tab>'", {expr = true})
+            -- vim.keymap.set({'i'}, '<s-tab>', "pumvisible() ? '<c-p>' : '<s-tab>'", {expr = true})
+            -- vim.keymap.set({'i'}, '<cr>', "pumvisible() ? '<c-y>' : '<cr>'", {expr = true})
         end
     end,
 })
+vim.keymap.set({'n'}, '<leader>gd', function() vim.lsp.buf.definition() end, {})
 
-vim.o.completeopt = "menu,menuone,noinsert,noselect,popup,fuzzy"
-vim.o.pumheight = 10
-
--- local servers = { "lua-language-server", "clangd", "zls" }
--- for _, server in ipairs(servers) do
---   vim.lsp.enable(server)
--- end
+local servers = { "lua-language-server", "clangd", "zls" }
+for _, server in ipairs(servers) do
+  vim.lsp.enable(server)
+end
 
 vim.diagnostic.config({ virtual_text = true })
-vim.keymap.set({'n'}, '<leader>gd', function() vim.lsp.buf.definition() end, {buffer = true})
--- vim.keymap.set({'i'}, '<Tab>', "pumvisible() ? '<c-n>' : '<tab>'", {expr = true})
--- vim.keymap.set({'i'}, '<s-tab>', "pumvisible() ? '<c-p>' : '<s-tab>'", {expr = true})
--- vim.keymap.set({'i'}, '<cr>', "pumvisible() ? '<c-y>' : '<cr>'", {expr = true})
 
 add({
     source = 'nvim-treesitter/nvim-treesitter',
@@ -75,9 +77,6 @@ add({
 local harpoon = require("harpoon")
 -- REQUIRED
 harpoon:setup()
-
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 vim.o.smartindent = true
 vim.o.shiftround = true
@@ -122,10 +121,27 @@ vim.keymap.set({'n', 'i'}, '<C-k>', function () harpoon:list():select(2) end)
 vim.keymap.set({'n', 'i'}, '<C-l>', function () harpoon:list():select(3) end)
 vim.keymap.set({'n', 'i'}, '<C-h>', function () harpoon:list():select(4) end)
 
-if vim.o.wrap then
-  vim.keymap.set("n", "j", [[v:count ? 'j' : 'gj']], { expr = true })
-  vim.keymap.set("n", "k", [[v:count ? 'k' : 'gk']], { expr = true })
-end
+vim.keymap.set("t", "<esc>", (function()
+    local timer = assert(vim.uv.new_timer())
+    return function()
+        if timer:is_active() then
+            timer:stop()
+            vim.cmd("stopinsert")
+        else
+            timer:start(200, 0, function() end)
+            return "<esc>"
+        end
+    end
+end)(), {})
+
+vim.api.nvim_create_autocmd('OptionSet', {
+    callback = function(_)
+        if vim.o.wrap then
+            vim.keymap.set("n", "j", [[v:count ? 'j' : 'gj']], { expr = true })
+            vim.keymap.set("n", "k", [[v:count ? 'k' : 'gk']], { expr = true })
+        end
+    end,
+})
 
 -- Visual
 vim.o.termguicolors = true
@@ -148,4 +164,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = highlight_group,
     pattern = '*',
 })
-

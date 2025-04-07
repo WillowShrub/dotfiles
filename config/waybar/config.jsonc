@@ -4,7 +4,7 @@
     "height": 24,
     "spacing": 5,
 
-    "modules-left": ["niri/workspaces"],
+    "modules-left": ["river/tags"],
     "modules-center": ["mpd"],
     "modules-right": ["clock", "group/sys", "group/net", "tray"],
 
@@ -18,17 +18,8 @@
         "modules": ["network", "bluetooth"]
     },
 
-    "niri/workspaces": {
-        "format": "{icon}",
-        "on-click": "activate",
-        "icon-size": 50,
-        "sort-by-number": true,
-        "format-icons": {
-            "default": "",
-            "focused": "",
-            "active": "",
-            "scratchpad": ""
-        }
+    "river/tags": {
+        "num-tags": 9
     },
 
     "mpd": {

@@ -13,19 +13,19 @@
     /* border: 1px solid @overlay; */
 }
 
-#workspaces button {
-    padding-left: 1em;
-    padding-right: 1.3em;
-    color: @text;
-}
 
-#workspaces button.empty {
+#tags button {
+    padding-left: 0.5em;
+    padding-right: 0.8em;
     color: @muted;
 }
 
-#workspaces button.focused {
+#tags button.occupied {
+    color: @text;
+}
+
+#tags button.focused {
     background-color: @overlay;
-    border-radius: 3px;
 }
 
 #sys,
@@ -43,16 +43,6 @@
 #clock {
     background-color: @iris;
     color: @surface;
-}
-
-#custom-scratchpad-indicator {
-    padding-top: 0.3em;
-}
-
-#workspaces button#niri-workspace-scratchpad {
-    padding-left: 0.4em;
-    padding-right: 0.7em;
-    color: @muted;
 }
 
 #battery,

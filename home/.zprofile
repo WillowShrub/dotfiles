@@ -48,5 +48,5 @@ if [ "$TERM" = "linux" ]; then
 fi
 
 if [[ "$(tty)" = "/dev/tty1" ]]; then 
-    dbus-run-session niri; exit
+    dbus-run-session river; exit
 fi

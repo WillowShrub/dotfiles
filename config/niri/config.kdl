@@ -116,13 +116,13 @@ layout {
 // spawn-at-startup "alacritty" "-e" "fish"
 spawn-at-startup "nm-applet"
 spawn-at-startup "niri" "msg" "action" "focus-workspace" "2"
-spawn-at-startup "swaybg" "-i" "/home/willow/.config/wallpapers/somethingBeautiful.jpg"
+spawn-at-startup "swaybg" "-i" "$HOME/.config/wallpapers/leafy-moon.png"
 spawn-at-startup "mako"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "mpd-mpris"
-spawn-at-startup "waybar"
+spawn-at-startup "waybar" "-c" "$HOME/.config/waybar/niri/config.jsonc"
 spawn-at-startup "xwayland-satellite"
-spawn-at-startup "swayidle" "-C" "/home/willow/.config/swayidle.conf"
+spawn-at-startup "swayidle" "-C" "$HOME/.config/swayidle.conf"
 
 environment {
     DISPLAY ":0"
@@ -198,7 +198,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Return { spawn "alacritty"; }
     Mod+Slash { spawn "wmenu-run"; }
-    Super+Alt+L { spawn "swaylock"; }
+    Mod+Alt+L { spawn "swaylock"; }
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
 
     Mod+M { spawn "dmount.sh"; }
