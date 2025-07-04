@@ -24,7 +24,8 @@ set $term footclient
 # Your preferred application launcher
 set $menu wmenu-run -i
 
-xwayland enable
+# xwayland enable
+exec xwayland-satellite
 
 ### Output configuration
 #
