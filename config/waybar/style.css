@@ -13,10 +13,9 @@
     /* border: 1px solid @overlay; */
 }
 
-
 #tags button {
-    padding-left: 0.5em;
-    padding-right: 0.8em;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
     color: @muted;
 }
 

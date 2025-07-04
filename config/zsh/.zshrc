@@ -11,6 +11,7 @@ zstyle ':vsc_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*' formats '%m%u%c %b'
 precmd() {
+    print -Pn "\e]133;A\e\\"
     vcs_info
 }
 
@@ -20,6 +21,7 @@ RPROMPT='${vcs_info_msg_0_}'
 HISTFILE=~/.cache/zsh/histfile
 HISTSIZE=1000
 SAVEHIST=1000
+export LC_ALL=en_US.UTF-8
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '$HOME/.config/zsh/.zshrc'

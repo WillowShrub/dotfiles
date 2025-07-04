@@ -5,13 +5,8 @@
     "spacing": 5,
 
     "modules-left": ["sway/workspaces"],
-    "modules-center": ["mpd"],
-    "modules-right": ["custom/scratchpad-indicator", "clock", "group/sys", "group/net", "group/notifytray"],
-
-    "group/notifytray": {
-        "orientation": "horizontal",
-        "modules": ["tray", "custom/power"]
-    },
+    "modules-center": ["mpris"],
+    "modules-right": ["custom/scratchpad-indicator", "clock", "group/sys", "group/net", "tray"],
 
     "group/sys": {
         "orientation": "horizontal",
@@ -30,17 +25,17 @@
         "sort-by-number": true
     },
 
-    "mpd": {
-        "format": "{stateIcon} {title}  ",
-        "format-disconnected": "Disconnected  ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped  ",
-        "interval": 10,
-        "state-icons": {
-            "paused": "",
-            "playing": ""
+    "mpris": {
+        "format": "{player_icon} {title}",
+        "format-paused": "{status_icon} <i>{title}</i>",
+        "player-icons": {
+            "default": "▶",
+            "mpd": "🎵"
         },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
+        "status-icons": {
+            "paused": "⏸"
+        },
+        // "ignored-players": ["firefox"]
     },
 
     "clock": {
@@ -104,7 +99,7 @@
         "tooltip-format": "{controller_alias}\t{controller_address}",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "on-click": "exec blueman-manager"
+        "on-click": "exec blueberry"
     },
 
     "power-profiles-daemon": {

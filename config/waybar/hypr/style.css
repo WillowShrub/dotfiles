@@ -1,0 +1,61 @@
+@import "../rosepine.css";
+
+* {
+    font-family: Comic Code;
+    font-size: 11px;
+    padding: 0;
+    margin: 0;
+}
+
+#waybar {
+    color: @text;
+    background-color: @base;
+}
+
+#workspaces button {
+    color: @muted;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
+}
+
+#workspaces button.active {
+    background-color: @overlay;
+    color: @foreground-inactive;
+}
+
+#sys,
+#usage,
+#notifytray,
+#tray,
+#custom-scratchpad-indicator,
+#clock,
+#net {
+    background-color: @overlay;
+    border-radius: 3px;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    margin-left: 0.3em;
+}
+
+
+#notifytray {
+    padding-right: 0.2em;
+}
+
+#clock {
+    background-color: @iris;
+    color: @surface;
+}
+
+#custom-scratchpad-indicator {
+    padding-top: 0.3em;
+}
+
+#battery,
+#wireplumber,
+#memory,
+#tray,
+#language,
+#network {
+    margin-right: 0.8em;
+}

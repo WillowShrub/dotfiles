@@ -15,6 +15,7 @@ riverctl map normal Super+Shift M  spawn dumount.sh
 riverctl map normal Super O spawn doffice.sh
 riverctl map normal Super P spawn dproject.sh
 riverctl map normal Super B spawn floorp
+riverctl map normal Super+Shift N spawn "systemctl restart NetworkManager"
 
 # Super+J and Super+K to focus the next/previous view in the layout stack
 riverctl map normal Super J focus-view next
@@ -90,9 +91,12 @@ done
 scratch_tag=$((1 << 20 ))
 riverctl map normal Super S toggle-focused-tags ${scratch_tag}		# toggle the scratchpad
 riverctl map normal Super+Shift S set-view-tags ${scratch_tag}		# send windows to the scratchpad
+background=$((1 << 23 ))
+riverctl map normal Super+Shift Equal set-view-tags ${background}		# send windows to the void
+riverctl map normal Super+Control Equal toggle-focused-tags ${background}		# retreive windows from the void
 
 # Set spawn tagmask to ensure new windows do not have the scratchpad tag unless explicitly set.
-all_but_scratch_tag=$(( ((1 << 32) - 1) ^ $scratch_tag ))
+all_but_scratch_tag=$(( ((1 << 32) - 1) ^ $scratch_tag ^ $background ))
 riverctl spawn-tagmask ${all_but_scratch_tag}
 
 all_tags=$(((1 << 32) - 1))
@@ -156,6 +160,6 @@ mako &
 mpd-mpris &
 wlsunset -s 21:00 -S 07:00 &
 swayidle -C "$HOME/.config/swayidle.conf" &
-swaybg -i "$HOME/.config/wallpapers/leafy-moon.png" &
+swaybg -m fill -i "$HOME/.config/wallpapers/DD-town.png" &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-wlr-randr --output eDP-1 --scale  1.5 &
+wlr-randr --output eDP-1 --scale  2 &

@@ -5,7 +5,7 @@ PROJECT="$(echo 'Projects
     wmenu -i)"
 
 if [ $PROJECT = 'Projects' ]; then
-    alacritty -e nvim ~/.local/share/projects &
+    foot nvim ~/.local/share/projects &
 elif [ $PROJECT != '' ]; then
-    alacritty --working-directory $PROJECT -e tmux -u new-session -A -s $PROJECT &
+    foot --working-directory $PROJECT tmux -u new-session -A -s $PROJECT &
 fi

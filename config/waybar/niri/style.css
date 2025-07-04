@@ -14,9 +14,8 @@
 }
 
 #workspaces button {
-    padding-left: 1em;
-    padding-right: 1.3em;
-    color: @text;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
 }
 
 #workspaces button.empty {
@@ -25,6 +24,7 @@
 
 #workspaces button.focused {
     background-color: @overlay;
+    color: @text;
     border-radius: 3px;
 }
 

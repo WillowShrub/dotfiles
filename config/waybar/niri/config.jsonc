@@ -5,7 +5,7 @@
     "spacing": 5,
 
     "modules-left": ["niri/workspaces"],
-    "modules-center": ["mpd"],
+    "modules-center": ["mpris"],
     "modules-right": ["clock", "group/sys", "group/net", "tray"],
 
     "group/sys": {
@@ -19,30 +19,28 @@
     },
 
     "niri/workspaces": {
-        "format": "{icon}",
+        "format": "{index}",
         "on-click": "activate",
         "icon-size": 50,
         "sort-by-number": true,
         "format-icons": {
             "default": "",
             "focused": "",
-            "active": "",
-            "scratchpad": ""
+            "active": ""
         }
     },
 
-    "mpd": {
-        "format": "{stateIcon} {title}  ",
-        "format-disconnected": "Disconnected  ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped  ",
-        "interval": 10,
-        "state-icons": {
-            "paused": "",
-            "playing": ""
+    "mpris": {
+        "format": "{player_icon} {title}",
+        "format-paused": "{status_icon} <i>{title}</i>",
+        "player-icons": {
+            "default": "▶",
+            "mpd": "🎵"
         },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)",
-        "on-click": "exec mpc toggle"
+        "status-icons": {
+            "paused": "⏸"
+        },
+        // "ignored-players": ["firefox"]
     },
 
     "clock": {

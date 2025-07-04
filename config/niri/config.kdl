@@ -36,10 +36,15 @@ input {
     focus-follows-mouse max-scroll-amount="75%"
 }
 
-workspace "scratchpad"
-workspace "main"
-workspace "work"
-workspace "mail"
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+workspace "9"
 
 /-output "eDP-1" {
 }
@@ -59,6 +64,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 1.0
 
         // Fixed sets the width in logical pixels exactly.
         // fixed 1920
@@ -68,7 +74,7 @@ layout {
 
     // You can change the default width of the new windows.
     // If you leave the brackets empty, the windows themselves will decide their initial width.
-    default-column-width { proportion 0.5; }
+    default-column-width { proportion 1.0; }
 
     // You can change how the focus ring looks.
     focus-ring {
@@ -99,6 +105,13 @@ layout {
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
+    tab-indicator {
+        width 8
+        gap 0
+        length total-proportion=1.0
+        position "top"
+        place-within-column
+    }
 
     // Struts shrink the area occupied by windows, similarly to layer-shell panels.
     // You can think of them as a kind of outer gaps. They are set in logical pixels.
@@ -112,17 +125,6 @@ layout {
         // bottom 64
     }
 }
-
-// spawn-at-startup "alacritty" "-e" "fish"
-spawn-at-startup "nm-applet"
-spawn-at-startup "niri" "msg" "action" "focus-workspace" "2"
-spawn-at-startup "swaybg" "-i" "$HOME/.config/wallpapers/leafy-moon.png"
-spawn-at-startup "mako"
-spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-spawn-at-startup "mpd-mpris"
-spawn-at-startup "waybar" "-c" "$HOME/.config/waybar/niri/config.jsonc"
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "swayidle" "-C" "$HOME/.config/swayidle.conf"
 
 environment {
     DISPLAY ":0"
@@ -148,7 +150,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Animations
 animations {
     // Uncomment to turn off all animations.
-    // off
+    off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
@@ -159,19 +161,24 @@ animations {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
 
 window-rule {
-    geometry-corner-radius 8
+    geometry-corner-radius 0
     clip-to-geometry true
 }
 
 window-rule {
-    match app-id="thunderbird"
-    open-on-workspace "mail"
+    match app-id="obs"
+    open-on-workspace "obs"
     open-maximized true
 }
 
 window-rule {
     match app-id="floorp"
     open-maximized true
+}
+
+window-rule {
+    match title="Wtube3d"
+    open-floating true
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
@@ -183,10 +190,18 @@ window-rule {
     open-floating true
 }
 
+// Block out mako notifications from screencasts.
+layer-rule {
+    match namespace="^notifications$"
+    block-out-from "screen-capture"
+    // block-out-from "screencast"
+}
+
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
     block-out-from "screen-capture"
+    // block-out-from "screencast"
     // Use this instead if you want them visible on third-party screenshot tools.
     // block-out-from "screencast"
 }
@@ -195,13 +210,14 @@ binds {
     // Most actions that you can bind here can also be invoked programmatically with
     // `niri msg action do-something`.
 
-    Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+Return { spawn "alacritty"; }
+    //Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+Return { spawn "footclient"; }
     Mod+Slash { spawn "wmenu-run"; }
     Mod+Alt+L { spawn "swaylock"; }
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
 
     Mod+M { spawn "dmount.sh"; }
+    Mod+Shift+N { spawn "systemctl" "restart" "NetworkManager"; }
     Mod+Shift+M { spawn "dumount.sh"; }
     Mod+O {spawn "doffice.sh";}
     Mod+P {spawn "dproject.sh"; }
@@ -267,37 +283,32 @@ binds {
     // Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
     // Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
 
-    Mod+s { focus-workspace 1; }
-    Mod+1 { focus-workspace 2; }
-    Mod+2 { focus-workspace 3; }
-    Mod+3 { focus-workspace 4; }
-    Mod+4 { focus-workspace 5; }
-    Mod+5 { focus-workspace 6; }
-    Mod+6 { focus-workspace 7; }
-    Mod+7 { focus-workspace 8; }
-    Mod+8 { focus-workspace 9; }
-    Mod+9 { focus-workspace 10; }
-    Mod+Shift+s { move-column-to-workspace 1; }
-    Mod+Shift+1 { move-column-to-workspace 2; }
-    Mod+Shift+2 { move-column-to-workspace 3; }
-    Mod+Shift+3 { move-column-to-workspace 4; }
-    Mod+Shift+4 { move-column-to-workspace 5; }
-    Mod+Shift+5 { move-column-to-workspace 6; }
-    Mod+Shift+6 { move-column-to-workspace 7; }
-    Mod+Shift+7 { move-column-to-workspace 8; }
-    Mod+Shift+8 { move-column-to-workspace 9; }
-    Mod+Shift+9 { move-column-to-workspace 10; }
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+0 { move-column-to-workspace 10; }
 
     // The following binds move the focused window in and out of a column.
     // If the window is alone, they will consume it into the nearby column to the side.
     // If the window is already in a column, they will expel it out.
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
-
-    // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
-    // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    Mod+Comma  { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
@@ -327,8 +338,8 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    Mod+Space       { toggle-window-floating; }
+    Mod+Shift+Space { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
     // Windows in this column will appear as vertical tabs,
@@ -371,3 +382,13 @@ switch-events {
 hotkey-overlay {
     skip-at-startup
 }
+
+spawn-at-startup "niribar.sh"
+spawn-at-startup "nm-applet"
+spawn-at-startup "swaybg" "-i" "/home/willow/.config/wallpapers/Catpuccin-DD-Town.png"
+spawn-at-startup "mako"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "mpd-mpris"
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "swayidle" "-C" "$HOME/.config/swayidle.conf"
+spawn-at-startup "foot" "-s"

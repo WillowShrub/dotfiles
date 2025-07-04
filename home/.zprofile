@@ -19,6 +19,11 @@ export MPD_HOST="127.0.0.1"
 export GOPATH="$HOME/.local/go"
 export COSMIC_DISABLE_DIRECT_SCANOUT=1
 export QT_STYLE_OVERRIDE="kvantum"
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export LC_ALL=en_US.UTF-8
+# export XDG_CURRENT_DESKTOP=sway
+# export XDG_SESSION_DESKTOP=sway
 # export DISPLAY=":0"
 
 #move dotfiles
@@ -47,6 +52,13 @@ if [ "$TERM" = "linux" ]; then
 	clear
 fi
 
+if [[ "$(tty)" = "/dev/tty2" ]]; then 
+    export XDG_SESSION_TYPE=wayland
+    export XDG_CURRENT_DESKTOP=sway
+    systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+    dbus-run-session sway; exit
+fi
 if [[ "$(tty)" = "/dev/tty1" ]]; then 
-    dbus-run-session river; exit
+    export XDG_SESSION_TYPE=wayland
+    exec niri-session
 fi

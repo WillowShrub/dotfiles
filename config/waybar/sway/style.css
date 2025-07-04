@@ -1,47 +1,50 @@
-@define-color foreground #cdd6f4;
-@define-color foreground-inactive #7f849c;
-@define-color background #1e1e2e;
-@define-color background-alt #313244;
+@import "../rosepine.css";
 
 * {
-    font-family: Jet Brains Mono Nerd Font;
-    font-size: 12px;
+    font-family: Comic Code;
+    font-size: 11px;
     padding: 0;
     margin: 0;
 }
 
 #waybar {
-    color: @foreground;
-    background-color: @background;
+    color: @text;
+    background-color: @base;
 }
 
 #workspaces button {
-    color: @forground-inactive;
-    padding-left: 1em;
-    padding-right: 1.3em;
-}
-
-#workspaces button.empty {
-    color: @foreground-inactive;
+    color: @muted;
+    padding-left: 0.25em;
+    padding-right: 0.25em;
 }
 
 #workspaces button.focused {
-    background-color: @background-alt;
-    color: @forground;
-    border-radius: 3px;
+    background-color: @overlay;
+    color: @foreground-inactive;
 }
 
 #sys,
 #usage,
 #notifytray,
+#tray,
 #custom-scratchpad-indicator,
 #clock,
 #net {
-    background-color: @background-alt;
+    background-color: @overlay;
     border-radius: 3px;
     padding-left: 0.5em;
     padding-right: 0.5em;
     margin-left: 0.3em;
+}
+
+
+#notifytray {
+    padding-right: 0.2em;
+}
+
+#clock {
+    background-color: @iris;
+    color: @surface;
 }
 
 #custom-scratchpad-indicator {
